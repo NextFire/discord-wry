@@ -9,5 +9,4 @@ wry = "0.27.3"
 
 [target.'cfg(target_os = "macos")'.dependencies]
 cocoa = "0.24.1"
-embed_plist = "1.2.2"
 objc = "0.2.7"

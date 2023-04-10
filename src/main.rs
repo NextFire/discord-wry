@@ -45,10 +45,6 @@ fn main() -> wry::Result<()> {
         })
         .build()?;
 
-    #[cfg(target_os = "macos")]
-    // https://github.com/tauri-apps/wry/issues/85#issuecomment-823499749
-    embed_plist::embed_info_plist_bytes!(MACOS_PLIST.as_bytes());
-
     event_loop.run(move |event, _, control_flow| {
         *control_flow = ControlFlow::Wait;
 
@@ -183,18 +179,4 @@ class NotificationOverride {
 
 // Override the global browser notification object.
 window.Notification = NotificationOverride;
-"#;
-
-#[cfg(target_os = "macos")]
-const MACOS_PLIST: &str = r#"
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>NSCameraUsageDescription</key>
-	<string>Request camera access for WebRTC</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Request microphone access for WebRTC</string>
-</dict>
-</plist>
 "#;
